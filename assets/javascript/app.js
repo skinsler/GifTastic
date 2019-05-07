@@ -3,6 +3,8 @@ $( document ).ready(function() {
 
     function renderButtons() {
 
+        $("#buttons").empty();
+
         for (let i=0;i<topics.length;i++) {
             let button = $("<button>");
             button.addClass("btn btn-primary topic-btn m-1");
@@ -18,14 +20,13 @@ $( document ).ready(function() {
     $(document).on("click", ".topic-btn", function(){
         var topic = $(this).attr("data-name");
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-          topic + "&api_key=IaQJ9HSoYke3qaiDntRKVdWxOLor3XLC&limit=10&rating=g";
+          topic + "&api_key=IaQJ9HSoYke3qaiDntRKVdWxOLor3XLC&limit=10";
     
         $.ajax({
           url: queryURL,
           method: "GET"
         })
           .then(function(response) {
-            console.log(response);
             var results = response.data;
     
             for (var i = 0; i < results.length; i++) {
@@ -33,7 +34,7 @@ $( document ).ready(function() {
     
               var rating = results[i].rating;
     
-              var p = $("<p>").text("Rating: " + rating);
+              var p = $("<p>").text("Rating: " + rating.toUpperCase());
 
               var stillImageUrl = results[i].images.fixed_height_still.url;
               var animatedImageUrl = results[i].images.fixed_height.url;
@@ -69,6 +70,13 @@ $( document ).ready(function() {
         };
 
     });
+
+    $("#add-button").on("click", function(event) {
+        event.preventDefault();
+        var item = $("#button-input").val().trim();
+        topics.push(item);
+        renderButtons();
+      });
 
 
 
