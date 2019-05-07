@@ -1,15 +1,19 @@
-topics = ["Looney Tunes","The Simpsons","Tom and Jerry","Scooby-Doo, Where Are You!","SpongeBob SquarePants","The Flintstones","Futurama","Batman: The Animated Series","Family Guy","South Park","Avatar: The Last Airbender","Dexter's Laboratory","Rugrats","Teen Titans","Pokémon","The Fairly OddParents","Popeye the Sailor","Teenage Mutant Ninja Turtles"];
-
 $( document ).ready(function() {
+    topics = ["Looney Tunes","The Simpsons","Tom and Jerry","Scooby-Doo, Where Are You!","SpongeBob SquarePants","The Flintstones","Futurama","Batman: The Animated Series","Family Guy","South Park","Avatar: The Last Airbender","Dexter's Laboratory","Rugrats","Teen Titans","Pokémon","The Fairly OddParents","Popeye the Sailor","Teenage Mutant Ninja Turtles"];
 
-    for (let i=0;i<topics.length;i++) {
-        let button = $("<button>");
-        button.addClass("btn btn-primary topic-btn");
-        button.attr("data-name", topics[i]);
-        button.text(topics[i]);
-        $("#buttons").append(button);
+    function renderButtons() {
+
+        for (let i=0;i<topics.length;i++) {
+            let button = $("<button>");
+            button.addClass("btn btn-primary topic-btn m-1");
+            button.attr("data-name", topics[i]);
+            button.text(topics[i]);
+            $("#buttons").append(button);
+        };
+
     };
 
+    renderButtons();
 
     $(document).on("click", ".topic-btn", function(){
         var topic = $(this).attr("data-name");
